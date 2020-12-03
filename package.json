@@ -14,7 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "browserify": "^17.0.0",
-    "mqtt": "^4.2.6",
+    "parcel-bundler": "^1.12.4",
     "tinyify": "^3.0.0"
   },
   "devDependencies": {
