@@ -2,3 +2,4 @@ node_modules
 .cache
 output.js
 dist
+.parcel-cache
