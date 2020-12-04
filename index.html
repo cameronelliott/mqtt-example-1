@@ -1,13 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>title</title>
-    <xlink rel="stylesheet" href="style.css">
-    <script src="output.js"></script>
-  </head>
-  <body>
-    <!-- page content -->
-    foo bar
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>title</title>
+  <xlink rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
+    <script>
+      //@ts-check
+      async function run() {
+
+        //  const params = new URLSearchParams(window.location.search)
+        // if (params.has('user') && params.has('pass') && params.has('url')) {
+        // const u = params.get('user')
+        // const p = params.get('pass')
+        // const  url=params.get('url')
+        // } else {
+        //   console.log('user,pass,url params must be in url')
+        // }
+
+
+
+        // @ts-ignore
+        const a = new Sis4wow()
+        const url = 'wss://b-6399d958-9185-43a8-9779-ffa4c6c7ecea-1.mq.us-west-2.amazonaws.com:61619'
+        const w = await a.connect(url, 'jujufish', 'jujufish8899')
+
+        console.log('got connectact from mqtt!')
+
+        await a.subscribe('x')
+        a.publish('y', 'yyyyy')
+
+        let p1 = a.wsp.sendRequest({ foo: 'bar' }, { requestId: 42 })
+        //@ts-ignore
+        const p2 = promiseTimeout(1000, p1)
+        try {
+          await p2
+        } catch (error) {
+          throw error
+        }
+        console.log(9999)
+        console.log(r)
+
+
+      }
+      run()
+    </script>
+</head>
+
+<body>
+  <!-- page content -->
+  foo bar
+</body>
+
 </html>
