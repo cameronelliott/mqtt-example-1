@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify -p tinyify index.js -o output.js",
-    "watch": "npx watchify -v -p tinyify index.js -o output.js",
+    "build": "parcel build index.html",
+    "watch": "parcel watch index.html",
     "dev": "npm-run-all --parallel start watch",
     "start": "serve public"
   },
@@ -15,12 +15,15 @@
   "dependencies": {
     "browserify": "^17.0.0",
     "mqtt-packet": "^6.6.0",
-    "parcel-bundler": "^1.12.4",
     "tinyify": "^3.0.0",
     "websocket-as-promised": "^1.1.0"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5",
+    "parcel": "^1.12.4",
     "serve": "^11.0.2"
-  }
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
 }
