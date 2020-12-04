@@ -1,4 +1,7 @@
 // @ts-check
+import WebSocketAsPromised from 'websocket-as-promised';
+
+
 const mqtt = require("mqtt-packet");
 /**
  * @type {mqtt.IConnectPacket} exconnect
@@ -7,18 +10,13 @@ const mqtt = require("mqtt-packet");
 
 const exconnect = {
   cmd: 'connect',
-  protocolId: 'MQTT',
-  // Or 'MQIsdp' in MQTT 3.1 and 5.0
-  protocolVersion: 4,
-  // Or 3 in MQTT 3.1, or 5 in MQTT 5.0
-  clean: true,
-  // Can also be false
+  protocolId: 'MQTT', // Or 'MQIsdp' in MQTT 3.1 and 5.0
+  protocolVersion: 4, // Or 3 in MQTT 3.1, or 5 in MQTT 5.0
+  clean: true, // Can also be false
   clientId: 'my-device',
-  keepalive: 0,
-  // Seconds which can be any positive number, with 0 as the default setting
+  keepalive: 0, // Seconds which can be any positive number, with 0 as the default setting
   username: 'matteo',
-  password: Buffer.from('collina'),
-  // Passwords are buffers
+  password: Buffer.from('collina'), // Passwords are buffers
   will: {
     topic: 'mydevice/status',
     payload: Buffer.from('dead') // Payloads are buffers
@@ -198,17 +196,13 @@ class Sis4wow {
 
   async connect(url, user, pass) {
     // ws://exp.com
-    this.wsp = new _websocketAsPromised.default(url, {
+
+    this.wsp = new WebSocketAsPromised(url, {
       // "mqtt" (preferred) or "mqttv3.1" 
       createWebSocket: url => new WebSocket(url, ['mqtt']),
-      packMessage: data => this.packer(data),
-      // take object, return mqtt publish
-      unpackMessage: data => this.unpacker(data),
-      // take mqtt message, return object
-      attachRequestId: (data, requestId) => Object.assign({
-        id: requestId
-      }, data),
-      // attach requestId to message as `id` field
+      packMessage: data => this.packer(data), // take object, return mqtt publish
+      unpackMessage: data => this.unpacker(data), // take mqtt message, return object
+      attachRequestId: (data, requestId) => Object.assign({ id: requestId }, data), // attach requestId to message as `id` field
       extractRequestId: data => data && data.id // read requestId from message `id` field
 
     });
